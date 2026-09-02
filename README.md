@@ -14,7 +14,7 @@ The application is real local-first software: it has no backend, user accounts, 
 
 ## Free public deployment options
 
-The repository includes a small `streamlit_app.py` entrypoint for Streamlit Community Cloud. Streamlit is a Python host, while LifeMap itself is a static React app, so the entrypoint preserves the complete responsive experience inside a full-screen frame. It defaults to the current public build and accepts a `LIFEMAP_URL` environment variable when a GitHub Pages URL becomes the preferred canonical host.
+The repository includes a small `streamlit_app.py` entrypoint for Streamlit Community Cloud. Streamlit is a Python host, while LifeMap itself is a static React app, so the entrypoint preserves the complete responsive experience inside a full-screen frame. It defaults to the free GitHub Pages build and accepts a `LIFEMAP_URL` environment variable if another public URL becomes the preferred canonical host.
 
 To deploy the shell for free, create a public GitHub repository, push this project, open [Streamlit Community Cloud](https://share.streamlit.io/), choose **Deploy an app**, select the repository and `streamlit_app.py`, and deploy. No API key or paid server is required. The standalone GitHub Pages workflow in `.github/workflows/deploy-pages.yml` remains the better direct host for the React app; Streamlit is an optional `streamlit.app` doorway to the same build.
 

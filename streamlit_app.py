@@ -14,7 +14,7 @@ import streamlit.components.v1 as components
 
 
 DEFAULT_LIFEMAP_URL = (
-    "https://lifemap-personal-progress-world.sanvidvaidya.chatgpt.site/"
+    "https://sanvidvaidya.github.io/lifemap/"
 )
 
 
