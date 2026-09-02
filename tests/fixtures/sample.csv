@@ -1,0 +1,9 @@
+Date,Activity,Category,Duration,Start,End,Energy,Mood,Planned,Completed,Notes
+2026-08-01,Sketching,Creative,75,09:00,10:15,4,4,true,true,First study
+2026-08-02,Trail walk,Outdoors,60,07:30,08:30,5,5,true,true,Morning route
+2026-08-03,Sketching,Creative,45,18:00,18:45,3,4,false,true,Color practice
+2026-08-04,Call family,Connection,40,20:00,20:40,3,5,true,true,Weekly call
+2026-08-05,Trail walk,Outdoors,80,07:20,08:40,5,5,true,true,Hill route
+2026-08-06,Sketching,Creative,90,09:15,10:45,4,4,true,true,Long study
+2026-08-07,Call family,Connection,35,20:10,20:45,3,5,true,true,Weekly call
+2026-08-08,Trail walk,Outdoors,70,07:30,08:40,4,5,true,true,River route

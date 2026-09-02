@@ -161,4 +161,3 @@ The workflow installs the locked dependencies, runs tests, builds the static sit
 - Cross-browser automated end-to-end CI.
 
 LifeMap requires no AI service. Transparent local computation is the feature.
-
