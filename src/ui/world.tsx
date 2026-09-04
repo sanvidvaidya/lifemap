@@ -761,7 +761,7 @@ export function CharacterPortrait({
       </div>
       <FaithfulProtagonist
         archetypeId={profile?.archetypeId ?? 'wayfinder'}
-        fallbackSrc={profile?.portraitSrc ?? '/art/characters/wayfinder.png'}
+        fallbackSrc={profile?.portraitSrc ?? './art/characters/wayfinder.png'}
         evolutionTier={evolutionTier}
         className="portrait-illustration portrait-original-form"
       />

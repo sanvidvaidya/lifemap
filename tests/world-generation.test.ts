@@ -74,7 +74,7 @@ describe('world generation engine', () => {
       const profile = createCharacterProfile(analytics);
       expect(selectCharacterArchetype(analytics)).toBe(expected);
       expect(profile.archetypeId).toBe(expected);
-      expect(profile.portraitSrc).toBe(`/art/characters/${expected}.png`);
+      expect(profile.portraitSrc).toBe(`./art/characters/${expected}.png`);
     });
   });
 
@@ -91,7 +91,7 @@ describe('world generation engine', () => {
       const analytics = analyze(recordsFor(category, 4, 90));
       const profile = createCharacterProfile(analytics);
       expect(profile.archetypeId).toBe(expected);
-      expect(profile.portraitSrc).toBe(`/art/characters/${expected}.png`);
+      expect(profile.portraitSrc).toBe(`./art/characters/${expected}.png`);
       expect(profile.archetypeEvidence).toContain(
         'meets the 68% specialist threshold',
       );

@@ -70,73 +70,73 @@ const archetypeCatalog: Record<
     name: 'The Wayfinder',
     description:
       'A frontier cartographer shaped by exploration and broad, uncategorized paths.',
-    portraitSrc: '/art/characters/wayfinder.png',
+    portraitSrc: './art/characters/wayfinder.png',
   },
   'city-architect': {
     name: 'The City Architect',
     description:
       'A systems-minded builder shaped by career, projects, and professional momentum.',
-    portraitSrc: '/art/characters/city-architect.png',
+    portraitSrc: './art/characters/city-architect.png',
   },
   'guild-forgemaster': {
     name: 'The Guild Forgemaster',
     description:
       'A seasoned builder shaped by an especially concentrated commitment to work and projects.',
-    portraitSrc: '/art/characters/guild-forgemaster.png',
+    portraitSrc: './art/characters/guild-forgemaster.png',
   },
   'archive-sage': {
     name: 'The Archive Sage',
     description:
       'A patient scholar shaped by study, reading, research, and deliberate practice.',
-    portraitSrc: '/art/characters/archive-sage.png',
+    portraitSrc: './art/characters/archive-sage.png',
   },
   'observatory-scholar': {
     name: 'The Observatory Scholar',
     description:
       'A devoted observer shaped by an especially concentrated season of study and research.',
-    portraitSrc: '/art/characters/observatory-scholar.png',
+    portraitSrc: './art/characters/observatory-scholar.png',
   },
   'trail-warden': {
     name: 'The Trail Warden',
     description:
       'An energetic pathfinder shaped by movement, fitness, health, and training.',
-    portraitSrc: '/art/characters/trail-warden.png',
+    portraitSrc: './art/characters/trail-warden.png',
   },
   'circuit-ranger': {
     name: 'The Circuit Ranger',
     description:
       'An endurance specialist shaped by an especially concentrated rhythm of movement and training.',
-    portraitSrc: '/art/characters/circuit-ranger.png',
+    portraitSrc: './art/characters/circuit-ranger.png',
   },
   'hearth-envoy': {
     name: 'The Hearth Envoy',
     description:
       'A luminous connector shaped by relationships, community, and shared time.',
-    portraitSrc: '/art/characters/hearth-envoy.png',
+    portraitSrc: './art/characters/hearth-envoy.png',
   },
   'festival-herald': {
     name: 'The Festival Herald',
     description:
       'A trusted host shaped by an especially concentrated season of community and shared time.',
-    portraitSrc: '/art/characters/festival-herald.png',
+    portraitSrc: './art/characters/festival-herald.png',
   },
   grovekeeper: {
     name: 'The Grovekeeper',
     description:
       'A restorative keeper shaped by leisure, hobbies, rest, and recreation.',
-    portraitSrc: '/art/characters/grovekeeper.png',
+    portraitSrc: './art/characters/grovekeeper.png',
   },
   'dream-gardener': {
     name: 'The Dream Gardener',
     description:
       'A restorative cultivator shaped by an especially concentrated season of hobbies, leisure, and rest.',
-    portraitSrc: '/art/characters/dream-gardener.png',
+    portraitSrc: './art/characters/dream-gardener.png',
   },
   'atelier-weaver': {
     name: 'The Atelier Weaver',
     description:
       'An inventive maker shaped by art, music, writing, design, and creative work.',
-    portraitSrc: '/art/characters/atelier-weaver.png',
+    portraitSrc: './art/characters/atelier-weaver.png',
   },
 };
 

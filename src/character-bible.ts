@@ -22,7 +22,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'exploration',
     domainLabel: 'Exploration and broad paths',
     form: 'core',
-    portraitSrc: '/art/characters/wayfinder.png',
+    portraitSrc: './art/characters/wayfinder.png',
     identity:
       'Young woman with warm medium skin, short wavy dark hair, and small braided ornaments.',
     silhouette:
@@ -39,7 +39,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'career',
     domainLabel: 'Career and projects',
     form: 'core',
-    portraitSrc: '/art/characters/city-architect.png',
+    portraitSrc: './art/characters/city-architect.png',
     identity:
       'Young woman with warm olive skin and dark hair gathered into a practical loose bun.',
     silhouette:
@@ -55,7 +55,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'career',
     domainLabel: 'Concentrated career craft',
     form: 'specialist',
-    portraitSrc: '/art/characters/guild-forgemaster.png',
+    portraitSrc: './art/characters/guild-forgemaster.png',
     identity:
       'Older Black man with close gray hair, a full gray beard, and a powerful stocky build.',
     silhouette:
@@ -72,7 +72,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'learning',
     domainLabel: 'Learning and study',
     form: 'core',
-    portraitSrc: '/art/characters/archive-sage.png',
+    portraitSrc: './art/characters/archive-sage.png',
     identity:
       'Young scholar with round glasses, a calm expression, and dark hair tied back.',
     silhouette:
@@ -88,7 +88,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'learning',
     domainLabel: 'Concentrated research',
     form: 'specialist',
-    portraitSrc: '/art/characters/observatory-scholar.png',
+    portraitSrc: './art/characters/observatory-scholar.png',
     identity:
       'Older brown-skinned man with swept white hair, a full white beard, and an observant gaze.',
     silhouette:
@@ -104,7 +104,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'fitness',
     domainLabel: 'Movement and fitness',
     form: 'core',
-    portraitSrc: '/art/characters/trail-warden.png',
+    portraitSrc: './art/characters/trail-warden.png',
     identity:
       'Athletic bearded man with short brown hair and an alert expedition-ready stance.',
     silhouette:
@@ -120,7 +120,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'fitness',
     domainLabel: 'Concentrated training',
     form: 'specialist',
-    portraitSrc: '/art/characters/circuit-ranger.png',
+    portraitSrc: './art/characters/circuit-ranger.png',
     identity:
       'Young East Asian woman with short dark hair and a compact athletic climber build.',
     silhouette:
@@ -136,7 +136,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'social',
     domainLabel: 'Relationships and community',
     form: 'core',
-    portraitSrc: '/art/characters/hearth-envoy.png',
+    portraitSrc: './art/characters/hearth-envoy.png',
     identity:
       'Young Black man with short curls, a neat beard, and a warm ceremonial presence.',
     silhouette:
@@ -152,7 +152,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'social',
     domainLabel: 'Concentrated community',
     form: 'specialist',
-    portraitSrc: '/art/characters/festival-herald.png',
+    portraitSrc: './art/characters/festival-herald.png',
     identity:
       'South Asian woman with long decorated braids, a bright expression, and confident bearing.',
     silhouette:
@@ -172,7 +172,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'recreation',
     domainLabel: 'Rest and recreation',
     form: 'core',
-    portraitSrc: '/art/characters/grovekeeper.png',
+    portraitSrc: './art/characters/grovekeeper.png',
     identity:
       'Young East Asian man with swept dark hair, a relaxed smile, and an outdoorsy build.',
     silhouette:
@@ -188,7 +188,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'recreation',
     domainLabel: 'Concentrated restoration',
     form: 'specialist',
-    portraitSrc: '/art/characters/dream-gardener.png',
+    portraitSrc: './art/characters/dream-gardener.png',
     identity:
       'Older East Asian woman with silver hair in a loose bun and a warm, grounded expression.',
     silhouette:
@@ -204,7 +204,7 @@ export const CHARACTER_BIBLE: CharacterBibleEntry[] = [
     domain: 'creative',
     domainLabel: 'Art and creative work',
     form: 'core',
-    portraitSrc: '/art/characters/atelier-weaver.png',
+    portraitSrc: './art/characters/atelier-weaver.png',
     identity:
       'Young Black man with short shaped hair, a groomed beard, and an athletic creative presence.',
     silhouette:
