@@ -1,6 +1,6 @@
 /* oxlint-disable next/no-img-element -- LifeMap is a Vite SPA using a bundled local protagonist asset. */
 import { Minus, Plus, RotateCcw } from 'lucide-react';
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo } from 'react';
 import type { CSSProperties, KeyboardEvent } from 'react';
 
 import {
@@ -8,6 +8,9 @@ import {
   createWorldConfiguration,
 } from '../world-generation';
 import { FaithfulProtagonist } from './faithful-protagonist';
+import { portraitAsset } from './portrait-assets';
+import { useAtlasCamera } from './use-atlas-camera';
+import { cameraViewBox } from './atlas-camera';
 import type {
   Analytics,
   CharacterProfile,
@@ -286,24 +289,19 @@ export function WorldMap({
     displayedDistricts.find(
       (district) => district.category === selectedCategory,
     ) ?? displayedDistricts[0];
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const { svgRef, camera, handlers, exploring, toggleExploring, zoomBy, reset, focus } = useAtlasCamera();
   const avatarTarget = selectedDistrict
     ? slotForDistrict(selectedDistrict).center
     : ([380, 248] as const);
   const selectedDistrictCategory = selectedDistrict?.category;
   const profile = createCharacterProfile(analytics, selectedDistrictCategory);
+  const [selectedX, selectedY] = avatarTarget;
+  useEffect(() => {
+    if (!compact) focus(selectedX, selectedY);
+  }, [compact, selectedX, selectedY, focus]);
 
-  const resetCamera = () => {
-    setZoom(1);
-    setPan({ x: 0, y: 0 });
-  };
   const selectDistrict = (district: DistrictBlueprint) => {
     onSelect?.(district.category);
-    if (!compact) {
-      const center = slotForDistrict(district).center;
-      setPan({ x: (380 - center[0]) * 0.12, y: (250 - center[1]) * 0.1 });
-    }
   };
   const districtKeyDown = (
     event: KeyboardEvent<SVGGElement>,
@@ -327,7 +325,7 @@ export function WorldMap({
 
   return (
     <div
-      className={`world-canvas atmosphere-${world.atmosphere} ${compact ? 'world-compact' : ''}`}
+      className={`world-canvas atmosphere-${world.atmosphere} ${compact ? 'world-compact' : 'world-interactive'} ${exploring ? 'camera-exploring' : ''}`}
       data-world-fingerprint={world.fingerprint}
     >
       <div className="world-horizon" aria-hidden="true">
@@ -336,8 +334,10 @@ export function WorldMap({
         <i />
       </div>
       <svg
+        ref={svgRef}
         className="world-svg"
-        viewBox="0 0 760 500"
+        viewBox={cameraViewBox(camera)}
+        {...(!compact ? handlers : {})}
         aria-labelledby={`living-map-title-${id} living-map-desc-${id}`}
       >
         <title id={`living-map-title-${id}`}>
@@ -390,10 +390,6 @@ export function WorldMap({
         <g
           key={world.fingerprint}
           className="world-reconstruction"
-          style={{
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-            transformOrigin: '380px 260px',
-          }}
         >
           <path d="M18 248 380 42 742 248 380 478Z" fill={`url(#sea-${id})`} />
           <g
@@ -445,7 +441,10 @@ export function WorldMap({
             })}
           </g>
 
-          <g filter={`url(#world-shadow-${id})`}>
+          <g
+            className="world-platform-layer"
+            filter={`url(#world-shadow-${id})`}
+          >
             {displayedDistricts.map((district) => {
               const slot = slotForDistrict(district);
               const isSelected =
@@ -645,7 +644,7 @@ export function WorldMap({
               />
               <circle cx="28" cy="61" r="22" className="avatar-arrival-ring" />
               <image
-                href={profile.portraitSrc}
+                href={portraitAsset(profile.portraitSrc, 160)}
                 x="0"
                 y="0"
                 width="56"
@@ -681,21 +680,43 @@ export function WorldMap({
         <div className="camera-controls" aria-label="World camera controls">
           <button
             type="button"
-            onClick={() => setZoom((value) => Math.min(1.45, value + 0.12))}
-            aria-label="Zoom in"
+            className="camera-explore-toggle"
+            onClick={toggleExploring}
+            aria-pressed={exploring}
+          >
+            {exploring ? 'Done' : 'Explore'}
+          </button>
+          <button
+            type="button"
+            onClick={() => zoomBy(-0.25)}
+            aria-label="Zoom out of the atlas"
+            title="Zoom out"
+            disabled={camera.zoom <= 1}
+          >
+            <Minus />
+          </button>
+          <output className="camera-zoom-status" aria-live="polite">
+            {Math.round(camera.zoom * 100)}%
+          </output>
+          <button
+            type="button"
+            onClick={() => zoomBy(0.25)}
+            aria-label="Zoom into the atlas"
+            title="Zoom in"
+            disabled={camera.zoom >= 3}
           >
             <Plus />
           </button>
           <button
             type="button"
-            onClick={() => setZoom((value) => Math.max(0.78, value - 0.12))}
-            aria-label="Zoom out"
+            onClick={reset}
+            aria-label="Reset atlas zoom"
+            title="Reset zoom"
+            disabled={camera.zoom === 1}
           >
-            <Minus />
-          </button>
-          <button type="button" onClick={resetCamera} aria-label="Reset camera">
             <RotateCcw />
           </button>
+          <p className="camera-help">{exploring ? 'Drag to move. Pinch to zoom. Tap Done to scroll.' : 'Use + to zoom, or Explore to drag and pinch.'}</p>
         </div>
       )}
       {!compact && selectedDistrict && (

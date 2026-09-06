@@ -98,6 +98,8 @@ import type {
   ValidationIssue,
 } from '../types';
 import { FaithfulProtagonist } from './faithful-protagonist';
+import { portraitAsset } from './portrait-assets';
+import { CharacterInspector } from './character-inspector';
 import { CharacterPortrait, WorldMap } from './world';
 
 const navItems: Array<{ id: AppView; label: string; icon: typeof Map }> = [
@@ -519,7 +521,12 @@ export function LifeMapApp() {
         </button>
         <div className="player-hud" aria-label="Protagonist progression">
           <div className="player-token">
-            <img src={hudProfile.portraitSrc} alt="" />
+            <img
+              src={portraitAsset(hudProfile.portraitSrc, 160)}
+              alt=""
+              decoding="async"
+              draggable={false}
+            />
           </div>
           <div className="player-identity">
             <span>{displayName || hudProfile.archetypeName}</span>
@@ -902,7 +909,7 @@ function Landing(props: LandingProps) {
           </div>
           <div className="hero-game-hud">
             <div className="hero-player-token">
-              <img src={showcase.portraitSrc} alt="" />
+              <img src={portraitAsset(showcase.portraitSrc, 160)} alt="" decoding="async" />
             </div>
             <span>
               <small>{showcase.form} protagonist</small>
@@ -947,7 +954,16 @@ function Landing(props: LandingProps) {
                     aria-label={`Preview ${entry.name}`}
                     title={entry.name}
                   >
-                    <img src={entry.portraitSrc} alt="" />
+                    <img
+                      src={portraitAsset(entry.portraitSrc, 160)}
+                      alt=""
+                      loading={entry.id === showcase.id ? 'eager' : 'lazy'}
+                      decoding="async"
+                      fetchPriority={
+                        entry.id === showcase.id ? 'high' : 'low'
+                      }
+                      draggable={false}
+                    />
                     <span>{entry.name.replace('The ', '')}</span>
                   </button>
                 </li>
@@ -1478,6 +1494,7 @@ function WorldView({
             <button type="button" onClick={() => onView('character')}>
               Open character <ChevronRight />
             </button>
+            <CharacterInspector src={protagonist.portraitSrc} name={name || protagonist.archetypeName} />
           </div>
         </aside>
 
@@ -1652,6 +1669,7 @@ function CharacterView({
             style={style}
             name={name}
           />
+          <CharacterInspector src={profile.portraitSrc} name={name || profile.archetypeName} />
           <p className="character-render-note">
             The authoritative character design with spatial depth, light, and
             movement. No substitute face or body.
@@ -1767,7 +1785,7 @@ function CharacterView({
               >
                 <figure>
                   <img
-                    src={entry.portraitSrc}
+                    src={portraitAsset(entry.portraitSrc, 512)}
                     alt=""
                     loading="lazy"
                     decoding="async"

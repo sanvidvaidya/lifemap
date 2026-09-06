@@ -3,6 +3,7 @@ import type { CSSProperties, PointerEvent } from 'react';
 
 import { CHARACTER_BIBLE_BY_ID } from '../character-bible';
 import type { CharacterArchetypeId } from '../types';
+import { portraitAsset, useCompactGraphics } from './portrait-assets';
 
 type FaithfulProtagonistProps = {
   archetypeId: CharacterArchetypeId;
@@ -29,6 +30,7 @@ export function FaithfulProtagonist({
   label,
 }: FaithfulProtagonistProps) {
   const entry = CHARACTER_BIBLE_BY_ID[archetypeId];
+  const compact = useCompactGraphics();
   const style: PortraitStyle = {
     '--faithful-accent': entry.palette[0],
     '--faithful-secondary': entry.palette[1],
@@ -39,6 +41,9 @@ export function FaithfulProtagonist({
   };
 
   const move = (event: PointerEvent<HTMLDivElement>) => {
+    // Touch gestures belong to the atlas or the page. Avoid continuously
+    // rebuilding GPU layers while a phone user is scrolling or zooming.
+    if (event.pointerType === 'touch') return;
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / Math.max(1, bounds.width);
     const y = (event.clientY - bounds.top) / Math.max(1, bounds.height);
@@ -74,17 +79,21 @@ export function FaithfulProtagonist({
     >
       <span className="faithful-protagonist-aura" aria-hidden="true" />
       <span className="faithful-protagonist-ground" aria-hidden="true" />
-      <img
-        src={fallbackSrc}
+      {!compact && <img
+        src={portraitAsset(fallbackSrc, 512)}
         alt=""
         className="faithful-protagonist-shadow"
         aria-hidden="true"
-      />
+        decoding="async"
+        draggable={false}
+      />}
       <img
-        src={fallbackSrc}
+        src={compact ? portraitAsset(fallbackSrc, 512) : fallbackSrc}
         alt=""
         className="faithful-protagonist-art"
         aria-hidden="true"
+        decoding="async"
+        draggable={false}
       />
       <span className="faithful-protagonist-light" aria-hidden="true" />
     </div>
