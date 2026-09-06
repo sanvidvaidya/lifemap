@@ -6,7 +6,7 @@ import type { AtlasCamera } from './atlas-camera';
 type Point = { x: number; y: number };
 type Gesture = { camera: AtlasCamera; midpoint: Point; distance: number };
 
-export function useAtlasCamera(initialExploring = false) {
+export function useAtlasCamera(initialExploring = false, fit: 'meet' | 'slice' = 'meet') {
   const svgRef = useRef<SVGSVGElement>(null);
   const current = useRef(DEFAULT_CAMERA);
   const pointers = useRef(new Map<number, Point>());
@@ -39,7 +39,7 @@ export function useAtlasCamera(initialExploring = false) {
   const focus = useCallback((x: number, y: number) => draw({ ...current.current, x, y }, true), [draw]);
   const point = (event: PointerEvent<SVGSVGElement>): Point => {
     const bounds = event.currentTarget.getBoundingClientRect();
-    const scale = Math.min(bounds.width / 760, bounds.height / 500);
+    const scale = (fit === 'slice' ? Math.max : Math.min)(bounds.width / 760, bounds.height / 500);
     return {
       x: (event.clientX - bounds.left - (bounds.width - 760 * scale) / 2) / scale,
       y: (event.clientY - bounds.top - (bounds.height - 500 * scale) / 2) / scale,

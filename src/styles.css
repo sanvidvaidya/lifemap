@@ -419,7 +419,7 @@ html,body,#root{max-width:100%;overflow-x:clip}.app-shell{perspective:none}
 .inspect-character{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:44px;padding:.55rem .8rem;border:1px solid #8f8455;border-radius:.7rem;background:#15383a;color:#ead487;font-size:14px;touch-action:manipulation}
 .inspect-character svg{width:18px;height:18px}
 .character-stage>.inspect-character{position:relative;z-index:10;margin:.5rem auto;display:flex}
-.portrait-inspector{width:min(900px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:16px;border:1px solid #54776d;border-radius:16px;background:#09272a;color:#eeeadd;overflow:auto}
+.portrait-inspector{position:fixed;inset:0;margin:auto;width:min(560px,calc(100vw - 24px),90dvh);max-height:calc(100dvh - 24px);padding:16px;border:1px solid #54776d;border-radius:16px;background:#09272a;color:#eeeadd;overflow:auto}
 .portrait-inspector::backdrop{background:rgba(2,12,14,.88)}
 .portrait-inspector header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .portrait-inspector header strong{font:500 24px/1.2 var(--font-display)}
