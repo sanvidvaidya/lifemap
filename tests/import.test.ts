@@ -9,7 +9,7 @@ import {
   parseLifeMapPassport,
   suggestMapping,
 } from '../src/data/import';
-import { passportJson } from '../src/export';
+import { normalizedCsv, passportJson } from '../src/export';
 
 describe('activity import', () => {
   it('parses quoted CSV fields and embedded commas', () => {
@@ -76,5 +76,37 @@ describe('activity import', () => {
     expect(restored.preferences).toMatchObject({ displayName: 'Ari', accent: '#67d2a7', avatarStyle: 'field' });
     expect(restored.mappingRecipes).toEqual(recipes);
   });
-});
 
+  it('neutralizes formula injection characters in exported CSV', () => {
+    const maliciousRecord = {
+      id: 'sec-1',
+      date: '2026-08-01',
+      activity: '=cmd|"/C calc"!A0',
+      category: '+@sum(1+1)',
+      duration: 30,
+    };
+    const csv = normalizedCsv([maliciousRecord as any]);
+    expect(csv).toContain("\"'=cmd|\"\"/C calc\"\"!A0\"");
+    expect(csv).toContain("\"'+@sum(1+1)\"");
+  });
+
+  it('rejects prototype pollution keys in passport mapping recipes', () => {
+    const passportWithPollution = JSON.stringify({
+      format: 'lifemap-passport',
+      version: 1,
+      records: [{ date: '2026-08-01', activity: 'Read', category: 'Study', duration: 45 }],
+      preferences: { displayName: 'Ari' },
+      mappingRecipes: {
+        '__proto__': { date: 'polluted' },
+        'constructor': { date: 'polluted' },
+        'prototype': { date: 'polluted' },
+        'valid-recipe': { date: 'date' },
+      },
+    });
+    const parsed = parseLifeMapPassport(passportWithPollution);
+    expect(parsed.mappingRecipes).not.toHaveProperty('__proto__', { date: 'polluted' });
+    expect(parsed.mappingRecipes).not.toHaveProperty('constructor');
+    expect(parsed.mappingRecipes).not.toHaveProperty('prototype');
+    expect(parsed.mappingRecipes['valid-recipe']).toEqual({ date: 'date' });
+  });
+});

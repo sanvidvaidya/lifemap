@@ -8,7 +8,11 @@ import type {
 
 const fields: Array<keyof ActivityRecord> = ['id','date','startTime','endTime','activity','category','subcategory','duration','energy','mood','planned','completed','location','notes'];
 const scalar = (value: unknown) => typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' ? String(value) : value == null ? '' : JSON.stringify(value);
-const csvCell = (value: unknown) => `"${scalar(value).replace(/"/g, '""')}"`;
+const csvCell = (value: unknown) => {
+  const str = scalar(value);
+  const safe = /^[=+\-@\t\r]/.test(str) ? `'${str}` : str;
+  return `"${safe.replace(/"/g, '""')}"`;
+};
 const escapeHtml = (value: unknown) => scalar(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[character]!);
 
 function download(name: string, contents: string, type: string) {

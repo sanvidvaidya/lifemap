@@ -210,7 +210,7 @@ function sanitizeMappingRecipes(value: unknown): MappingRecipes {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
   const recipes: MappingRecipes = {};
   for (const [key, candidate] of Object.entries(value)) {
-    if (!key || key.length > 2000 || !candidate || typeof candidate !== 'object' || Array.isArray(candidate)) continue;
+    if (!key || key.length > 2000 || key === '__proto__' || key === 'constructor' || key === 'prototype' || !candidate || typeof candidate !== 'object' || Array.isArray(candidate)) continue;
     const mapping: FieldMapping = {};
     for (const field of CANONICAL_FIELDS) {
       const source = (candidate as Record<string, unknown>)[field];
